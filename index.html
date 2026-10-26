@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Integrador: Tecnologia, Ética e Saúde</title>
+    <title>Aba de Robótica — Acessibilidade</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f8fafc;
-            --card: #ffffff;
-            --text: #0f172a;
-            --border: #e2e8f0;
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --border-color: #e2e8f0;
             --accent: #10b981;
             --danger: #ef4444;
         }
@@ -20,76 +19,207 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #edf2f7;
             padding: 20px;
-            display: flex;
-            justify-content: center;
         }
 
-        .container {
-            max-width: 900px;
+        /* Container Principal da Aba */
+        .aba-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            min-height: 650px;
+        }
+
+        /* Menu Lateral de Navegação da Aba */
+        .aba-sidebar {
+            width: 260px;
+            background-color: var(--primary);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .aba-sidebar h3 {
+            color: white;
+            padding: 0 20px 15px 20px;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .aba-btn {
+            background: none;
+            border: none;
+            color: #cbd5e0;
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
             width: 100%;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: var(--card);
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        .aba-btn:hover {
+            background-color: rgba(255,255,255,0.05);
+            color: white;
         }
 
+        .aba-btn.active {
+            background-color: var(--secondary);
+            color: white;
+            font-weight: bold;
+            border-left: 5px solid #63b3ed;
+        }
+
+        /* Área de Conteúdo Dinâmico */
+        .aba-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            max-height: 850px;
+        }
+
+        .conteudo-secao {
+            display: none;
+        }
+
+        .conteudo-secao.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilização Geral do Conteúdo */
         h1 {
             color: var(--primary);
             font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .sub-header {
+            color: #718096;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
             margin-bottom: 8px;
         }
 
-        nav {
+        pre {
+            background-color: #2d3748;
+            color: #a0aec0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .img-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 10px;
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .highlight {
+            background-color: #feebc8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #c05621;
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA OS COMPONENTES DA ATIVIDADE 10 */
+        .sub-nav {
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
-        nav button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background: var(--card);
-            color: var(--text);
+        .sub-nav button {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-light);
+            color: var(--text-dark);
             font-weight: 600;
             cursor: pointer;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
             transition: all 0.2s;
-            min-width: 150px;
         }
 
-        nav button.active {
-            background: var(--primary);
+        .sub-nav button.active {
+            background: var(--secondary);
             color: white;
+            border-color: var(--secondary);
         }
 
-        nav button:hover:not(.active) {
-            background: #e0e7ff;
-        }
-
-        .tab-content {
+        .sub-tab-content {
             display: none;
-            background: var(--card);
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
-        .tab-content.active {
+        .sub-tab-content.active {
             display: block;
         }
 
@@ -106,18 +236,18 @@
         input, textarea, select {
             width: 100%;
             padding: 10px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 90px;
         }
 
         .btn {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             border: none;
             padding: 10px 18px;
@@ -128,7 +258,7 @@
         }
 
         .btn:hover {
-            background: var(--primary-hover);
+            background: var(--primary);
         }
 
         .btn-secondary {
@@ -146,13 +276,12 @@
             margin-top: 16px;
             padding: 12px;
             background: #f1f5f9;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid var(--secondary);
             border-radius: 4px;
             word-break: break-all;
             white-space: pre-wrap;
         }
 
-        /* Tabela Nutricional */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -162,36 +291,39 @@
         th, td {
             padding: 10px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
         }
 
         th {
-            background-color: #f8fafc;
+            background-color: #ebf8ff;
+            color: var(--secondary);
         }
 
         .nutrition-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
             gap: 10px;
             margin-top: 20px;
         }
 
         .card-stat {
-            background: #f1f5f9;
+            background: var(--bg-light);
             padding: 12px;
             border-radius: 8px;
             text-align: center;
+            border: 1px solid var(--border-color);
         }
 
         .card-stat span {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #64748b;
         }
 
         .card-stat strong {
-            font-size: 1.2rem;
-            color: var(--primary);
+            font-size: 1.1rem;
+            color: var(--secondary);
         }
 
         .disclaimer {
@@ -200,407 +332,519 @@
             margin-top: 15px;
             font-style: italic;
         }
+
+        @media (max-width: 768px) {
+            .aba-container {
+                flex-direction: column;
+            }
+            .aba-sidebar {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 10px 0;
+            }
+            .aba-sidebar h3 {
+                display: none;
+            }
+            .aba-btn {
+                padding: 10px 15px;
+                white-space: nowrap;
+                text-align: center;
+                border-left: none !important;
+            }
+            .aba-btn.active {
+                border-bottom: 3px solid #63b3ed;
+            }
+            .aba-content {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>PROJETO INTEGRADOR</h1>
-        <p>Tecnologia, Ética e Saúde</p>
-    </header>
-
-    <nav>
-        <button class="nav-btn active" onclick="switchTab('cofre')">1 - Cofre Digital</button>
-        <button class="nav-btn" onclick="switchTab('prompt')">2 - Engenharia de Prompt</button>
-        <button class="nav-btn" onclick="switchTab('nutricao')">3 - Calculadora Nutricional</button>
-    </nav>
-
-    <!-- ATIVIDADE 1: COFRE DIGITAL -->
-    <div id="cofre" class="tab-content active">
-        <h2>Cofre Digital (Criptografia AES-GCM)</h2>
-        <br>
+    <div class="aba-container">
         
-        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <button class="btn" id="btn-mode-enc" onclick="setVaultMode('enc')">Criptografar</button>
-            <button class="btn btn-secondary" id="btn-mode-dec" onclick="setVaultMode('dec')">Descriptografar</button>
-        </div>
+        <!-- Menu de Abas Lateral -->
+        <nav class="aba-sidebar">
+            <h3>Menu do Projeto</h3>
+            <button class="aba-btn active" onclick="mudarAba(event, 'aba-intro')">1. Introdução</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-matriz')">2. Matriz de LEDs</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-morse')">3. Código Morse</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-display')">4. Displays LCD</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-tabela')">5. Tabela Geral</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-cenario')">6. Análise Real</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-ia')">7. Registro de IA</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-melhoria')">8. Proposta Upgrade</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-conclusao')">9. Conclusão & Fontes</button>
+            <button class="aba-btn" onclick="mudarAba(event, 'aba-atividades')">10. Atividades do Projeto</button>
+        </nav>
 
-        <div id="vault-encrypt-form">
-            <div class="form-group">
-                <label for="msg-encrypt">Mensagem Secreta:</label>
-                <textarea id="msg-encrypt" placeholder="Digite sua mensagem aqui..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="pass-encrypt">Senha de Proteção:</label>
-                <input type="password" id="pass-encrypt" placeholder="Crie uma senha forte">
-            </div>
-            <button class="btn" onclick="executarCriptografia()">Criptografar Mensagem</button>
-        </div>
+        <!-- Painel de Conteúdo das Abas -->
+        <main class="aba-content">
 
-        <div id="vault-decrypt-form" style="display: none;">
-            <div class="form-group">
-                <label for="code-decrypt">Código Criptografado (Base64):</label>
-                <textarea id="code-decrypt" placeholder="Cole o código criptografado aqui..."></textarea>
-            </div>
-            <div class="form-group">
-                <label for="pass-decrypt">Senha:</label>
-                <input type="password" id="pass-decrypt" placeholder="Digite sua senha">
-            </div>
-            <button class="btn" onclick="executarDescriptografia()">Descriptografar Mensagem</button>
-        </div>
+            <!-- ABA 1: INTRODUÇÃO -->
+            <div id="aba-intro" class="conteudo-secao active">
+                <h1>Tecnologia a Serviço dos Sentidos</h1>
+                <p class="sub-header">Projeto Integrador: Inteligência Artificial e Tecnologias • Grupo: [Nomes]</p>
+                
+                <h2>Acessibilidade, Comunicação e Qualidade de Vida</h2>
+                <p>Para compreendermos o real valor da robótica assistiva, fundamentamos nossa pesquisa em três pilares essenciais:</p>
+                <ul>
+                    <li><strong>Acessibilidade:</strong> Autonomia e segurança para que qualquer indivíduo interaja com o meio, independente de barreiras biológicas.</li>
+                    <li><strong>Comunicação:</strong> A capacidade vital de expressar, trocar e receber dados, minimizando o isolamento social.</li>
+                    <li><strong>Qualidade de Vida:</strong> Nível de independência e bem-estar físico e social garantido pelas tecnologias adaptativas.</li>
+                </ul>
 
-        <div class="result-box" id="vault-result" style="display: none;"></div>
+                <h3>A Barreira Arquitetônica e Sensorial</h3>
+                <p>Identificamos um cenário crítico: um <span class="highlight">pronto-socorro hospitalar tumultuado</span> que convoca pacientes unicamente via áudio. Uma pessoa com deficiência auditiva severa perde seu atendimento de forma invisível. Nossa investigação foca em como a robótica mitiga essa falha de infraestrutura, respondendo à questão motriz do trimestre.</p>
+            </div>
+
+            <!-- ABA 2: MATRIZ DE LEDS -->
+            <div id="aba-matriz" class="conteudo-secao">
+                <h2>2. Matriz de LEDs: Sinais Visuais Universais</h2>
+                <h3>Princípio Técnico de Funcionamento</h3>
+                <p>Uma matriz de LEDs estrutura-se em uma malha ortogonal de linhas e colunas (comumente 8x8). O acionamento coordenado de imagens ocorre por <strong>multiplexação sequencial de alta velocidade</strong>. Ao invés de ligar todos os diodos simultaneamente — o que exigiria correntes elétricas inviáveis —, o microcontrolador varre as linhas de forma tão veloz que a <strong>persistência da visão humana</strong> consolida as piscadas rápidas como um símbolo estático contínuo.</p>
+
+                <pre>
+[Simulação Digital 8x8 — Ícone de Direcionamento]
+   ⚪ ⚪ ⚪ 🟢 🟢 ⚪ ⚪ ⚪   -> Linha 1
+   ⚪ ⚪ 🟢 🟢 🟢 🟢 ⚪ ⚪   -> Linha 2
+   ⚪ 🟢 ⚪ 🟢 🟢 ⚪ 🟢 ⚪   -> Linha 3
+   ⚪ ⚪ ⚪ 🟢 🟢 ⚪ ⚪ ⚪   -> Linha 4
+                </pre>
+
+                <div class="img-container">
+                    <img src="matriz-leds.png" alt="Circuito da Matriz de LEDs no Tinkercad">
+                </div>
+            </div>
+
+            <!-- ABA 3: CÓDIGO MORSE -->
+            <div id="aba-morse" class="conteudo-secao">
+                <h2>3. Emissão de Sinal Morse</h2>
+                <p>Conteúdo sobre o envio e conversão de sinais táteis e visuais via Código Morse.</p>
+            </div>
+
+            <!-- ABA 4: DISPLAYS LCD -->
+            <div id="aba-display" class="conteudo-secao">
+                <h2>4. Displays LCD (Textuais)</h2>
+                <p>Análise de exibição alfanumérica para indicação clara de chamadas e mensagens estruturadas.</p>
+            </div>
+
+            <!-- ABA 5: TABELA GERAL -->
+            <div id="aba-tabela" class="conteudo-secao">
+                <h2>5. Tabela Comparativa de Atuadores</h2>
+                <p>Comparativo técnico das interfaces estudadas.</p>
+            </div>
+
+            <!-- ABA 6: ANÁLISE REAL -->
+            <div id="aba-cenario" class="conteudo-secao">
+                <h2>6. Análise de Cenário Real</h2>
+                <p>Estudo de caso aplicado ao Pronto-Socorro Hospitalar.</p>
+            </div>
+
+            <!-- ABA 7: REGISTRO DE IA -->
+            <div id="aba-ia" class="conteudo-secao">
+                <h2>7. Registro de Uso de IA</h2>
+                <p>Documentação dos prompts e interações com inteligência artificial para o desenvolvimento do projeto.</p>
+            </div>
+
+            <!-- ABA 8: PROPOSTA UPGRADE -->
+            <div id="aba-melhoria" class="conteudo-secao">
+                <h2>8. Proposta de Upgrade</h2>
+                <p>Prototipagem do sistema integrado de sinalização adaptativa.</p>
+            </div>
+
+            <!-- ABA 9: CONCLUSÃO & FONTES -->
+            <div id="aba-conclusao" class="conteudo-secao">
+                <h2>9. Conclusão & Fontes Consultadas</h2>
+                <p>Considerações finais e referências bibliográficas.</p>
+            </div>
+
+            <!-- ABA 10: ATIVIDADES DO PROJETO (CÓDIGO PYTHON TRANSLADADO) -->
+            <div id="aba-atividades" class="conteudo-secao">
+                <h1>Atividades Práticas do Projeto Integrador</h1>
+                <p class="sub-header">Módulos Interativos: Criptografia, Inteligência Artificial e Saúde Nutricional</p>
+
+                <!-- Navegação Interna das Atividades -->
+                <div class="sub-nav">
+                    <button class="sub-nav-btn active" onclick="switchSubTab(event, 'sub-cofre')">Atividade 1: Cofre Digital</button>
+                    <button class="sub-nav-btn" onclick="switchSubTab(event, 'sub-prompt')">Atividade 2: Engenharia de Prompt</button>
+                    <button class="sub-nav-btn" onclick="switchSubTab(event, 'sub-nutricao')">Atividade 3: Calc. Nutricional</button>
+                </div>
+
+                <!-- SUB-ABA 1: COFRE DIGITAL -->
+                <div id="sub-cofre" class="sub-tab-content active">
+                    <h2>Cofre Digital (Criptografia AES-GCM)</h2>
+                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Proteção de dados sensíveis utilizando algoritmo de chave PBKDF2 e cifras AES de 256 bits diretamente no navegador.</p>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <button class="btn" id="btn-mode-enc" onclick="setVaultMode('enc')">Criptografar</button>
+                        <button class="btn btn-secondary" id="btn-mode-dec" onclick="setVaultMode('dec')">Descriptografar</button>
+                    </div>
+
+                    <div id="vault-encrypt-form">
+                        <div class="form-group">
+                            <label for="msg-encrypt">Mensagem Secreta:</label>
+                            <textarea id="msg-encrypt" placeholder="Digite sua mensagem aqui..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass-encrypt">Senha de Proteção:</label>
+                            <input type="password" id="pass-encrypt" placeholder="Crie uma senha forte">
+                        </div>
+                        <button class="btn" onclick="executarCriptografia()">Criptografar Mensagem</button>
+                    </div>
+
+                    <div id="vault-decrypt-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="code-decrypt">Código Criptografado (Base64):</label>
+                            <textarea id="code-decrypt" placeholder="Cole o código criptografado aqui..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass-decrypt">Senha:</label>
+                            <input type="password" id="pass-decrypt" placeholder="Digite sua senha">
+                        </div>
+                        <button class="btn" onclick="executarDescriptografia()">Descriptografar Mensagem</button>
+                    </div>
+
+                    <div class="result-box" id="vault-result" style="display: none;"></div>
+                </div>
+
+                <!-- SUB-ABA 2: ENGENHARIA DE PROMPT -->
+                <div id="sub-prompt" class="sub-tab-content">
+                    <h2>Engenharia de Prompt</h2>
+                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Módulo para estruturação de instruções acessíveis para modelos de Inteligência Artificial.</p>
+
+                    <div class="form-group">
+                        <label for="prompt-text">Texto para Simplificar:</label>
+                        <textarea id="prompt-text" placeholder="Cole ou digite o texto original aqui..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prompt-type">Tipo de Prompt:</label>
+                        <select id="prompt-type">
+                            <option value="1">1 - Criar prompt simples</option>
+                            <option value="2">2 - Criar prompt detalhado (Acessibilidade)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn" onclick="gerarPrompt()">Gerar Prompt</button>
+
+                    <div class="result-box" id="prompt-result" style="display: none;">
+                        <strong>--- PROMPT GERADO ---</strong>
+                        <p id="prompt-output" style="margin-top: 8px;"></p>
+                        <button class="btn btn-secondary" style="margin-top: 10px;" onclick="copiarPrompt()">Copiar Prompt</button>
+                    </div>
+                </div>
+
+                <!-- SUB-ABA 3: CALCULADORA NUTRICIONAL -->
+                <div id="sub-nutricao" class="sub-tab-content">
+                    <h2>Calculadora Nutricional</h2>
+                    <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">Estimativa de ingestão de macronutrientes para rotinas adaptadas e balanceadas.</p>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px;" class="form-group">
+                        <div>
+                            <label for="alimento-select">Alimento:</label>
+                            <select id="alimento-select"></select>
+                        </div>
+                        <div>
+                            <label for="alimento-qtd">Gramas (g):</label>
+                            <input type="number" id="alimento-qtd" value="100" min="1">
+                        </div>
+                        <div style="align-self: flex-end;">
+                            <button class="btn" onclick="adicionarAlimento()">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <h3>Itens Adicionados</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Alimento</th>
+                                <th>Qtd (g)</th>
+                                <th>Calorias</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-alimentos">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #94a3b8;">Nenhum alimento adicionado.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="nutrition-summary">
+                        <div class="card-stat">
+                            <span>Calorias</span>
+                            <strong id="tot-calorias">0.0 kcal</strong>
+                        </div>
+                        <div class="card-stat">
+                            <span>Proteínas</span>
+                            <strong id="tot-proteinas">0.0 g</strong>
+                        </div>
+                        <div class="card-stat">
+                            <span>Carboidratos</span>
+                            <strong id="tot-carboidratos">0.0 g</strong>
+                        </div>
+                        <div class="card-stat">
+                            <span>Gorduras</span>
+                            <strong id="tot-gorduras">0.0 g</strong>
+                        </div>
+                        <div class="card-stat">
+                            <span>Fibras</span>
+                            <strong id="tot-fibras">0.0 g</strong>
+                        </div>
+                    </div>
+
+                    <p class="disclaimer">* Valores aproximados para fins educativos. O resultado não substitui orientação nutricional.</p>
+                </div>
+
+            </div>
+
+        </main>
     </div>
 
-    <!-- ATIVIDADE 2: ENGENHARIA DE PROMPT -->
-    <div id="prompt" class="tab-content">
-        <h2>Engenharia de Prompt</h2>
-        <p style="margin-bottom: 15px; color: #64748b;">Gere instruções otimizadas para enviar a Modelos de IA.</p>
+    <script>
+        // ==========================================
+        // TROCA DE ABAS PRINCIPAIS
+        // ==========================================
+        function mudarAba(event, abaId) {
+            const secoes = document.querySelectorAll('.conteudo-secao');
+            secoes.forEach(secao => secao.classList.remove('active'));
 
-        <div class="form-group">
-            <label for="prompt-text">Texto para Simplificar:</label>
-            <textarea id="prompt-text" placeholder="Cole ou digite o texto original aqui..."></textarea>
-        </div>
+            const botoes = document.querySelectorAll('.aba-sidebar .aba-btn');
+            botoes.forEach(btn => btn.classList.remove('active'));
 
-        <div class="form-group">
-            <label for="prompt-type">Tipo de Prompt:</label>
-            <select id="prompt-type">
-                <option value="1">Prompt Simples</option>
-                <option value="2">Prompt Detalhado (Acessibilidade)</option>
-            </select>
-        </div>
-
-        <button class="btn" onclick="gerarPrompt()">Gerar Prompt</button>
-
-        <div class="result-box" id="prompt-result" style="display: none;">
-            <strong>Prompt Gerado:</strong>
-            <p id="prompt-output" style="margin-top: 8px;"></p>
-            <button class="btn btn-secondary" style="margin-top: 10px;" onclick="copiarPrompt()">Copiar Prompt</button>
-        </div>
-    </div>
-
-    <!-- ATIVIDADE 3: CALCULADORA NUTRICIONAL -->
-    <div id="nutricao" class="tab-content">
-        <h2>Calculadora Nutricional</h2>
-        
-        <div style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px; margin-top: 15px;" class="form-group">
-            <div>
-                <label for="alimento-select">Alimento:</label>
-                <select id="alimento-select"></select>
-            </div>
-            <div>
-                <label for="alimento-qtd">Gramas (g):</label>
-                <input type="number" id="alimento-qtd" value="100" min="1">
-            </div>
-            <div style="align-self: flex-end;">
-                <button class="btn" onclick="adicionarAlimento()">Adicionar</button>
-            </div>
-        </div>
-
-        <h3>Itens Adicionados</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Alimento</th>
-                    <th>Qtd (g)</th>
-                    <th>Calorias</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody id="lista-alimentos">
-                <tr>
-                    <td colspan="4" style="text-align: center; color: #94a3b8;">Nenhum alimento adicionado.</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="nutrition-summary">
-            <div class="card-stat">
-                <span>Calorias</span>
-                <strong id="tot-calorias">0 kcal</strong>
-            </div>
-            <div class="card-stat">
-                <span>Proteínas</span>
-                <strong id="tot-proteinas">0 g</strong>
-            </div>
-            <div class="card-stat">
-                <span>Carboidratos</span>
-                <strong id="tot-carboidratos">0 g</strong>
-            </div>
-            <div class="card-stat">
-                <span>Gorduras</span>
-                <strong id="tot-gorduras">0 g</strong>
-            </div>
-            <div class="card-stat">
-                <span>Fibras</span>
-                <strong id="tot-fibras">0 g</strong>
-            </div>
-        </div>
-
-        <p class="disclaimer">* Valores aproximados para fins educativos. Não substitui orientação nutricional profissional.</p>
-    </div>
-</div>
-
-<script>
-    // ==========================================
-    // NAVEGAÇÃO ENTRE ABAS
-    // ==========================================
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
-
-    // ==========================================
-    // ATIVIDADE 1 - COFRE DIGITAL (Crypto API Nativa)
-    // ==========================================
-    function setVaultMode(mode) {
-        const encForm = document.getElementById('vault-encrypt-form');
-        const decForm = document.getElementById('vault-decrypt-form');
-        const btnEnc = document.getElementById('btn-mode-enc');
-        const btnDec = document.getElementById('btn-mode-dec');
-        const resBox = document.getElementById('vault-result');
-
-        resBox.style.display = 'none';
-
-        if (mode === 'enc') {
-            encForm.style.display = 'block';
-            decForm.style.display = 'none';
-            btnEnc.className = 'btn';
-            btnDec.className = 'btn btn-secondary';
-        } else {
-            encForm.style.display = 'none';
-            decForm.style.display = 'block';
-            btnEnc.className = 'btn btn-secondary';
-            btnDec.className = 'btn';
-        }
-    }
-
-    // Função para derivar chave usando PBKDF2
-    async function getCryptoKey(senha, salt) {
-        const enc = new TextEncoder();
-        const keyMaterial = await crypto.subtle.importKey(
-            "raw", enc.encode(senha), "PBKDF2", false, ["deriveKey"]
-        );
-        return crypto.subtle.deriveKey(
-            {
-                name: "PBKDF2",
-                salt: salt,
-                iterations: 200000,
-                hash: "SHA-256"
-            },
-            keyMaterial,
-            { name: "AES-GCM", length: 256 },
-            false,
-            ["encrypt", "decrypt"]
-        );
-    }
-
-    async function executarCriptografia() {
-        const msg = document.getElementById('msg-encrypt').value;
-        const senha = document.getElementById('pass-encrypt').value;
-        const resBox = document.getElementById('vault-result');
-
-        if (!msg || !senha) {
-            alert('Preencha a mensagem e a senha.');
-            return;
+            document.getElementById(abaId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
-        try {
-            const salt = crypto.getRandomValues(new Uint8Array(16));
-            const iv = crypto.getRandomValues(new Uint8Array(12));
-            const key = await getCryptoKey(senha, salt);
+        // ==========================================
+        // TROCA DE SUB-ABAS (ATIVIDADE 10)
+        // ==========================================
+        function switchSubTab(event, subTabId) {
+            const subSecoes = document.querySelectorAll('.sub-tab-content');
+            subSecoes.forEach(sub => sub.classList.remove('active'));
 
-            const enc = new TextEncoder();
-            const encryptedContent = await crypto.subtle.encrypt(
-                { name: "AES-GCM", iv: iv },
-                key,
-                enc.encode(msg)
-            );
+            const subBotoes = document.querySelectorAll('.sub-nav-btn');
+            subBotoes.forEach(btn => btn.classList.remove('active'));
 
-            // Juntando Salt (16b) + IV (12b) + Dados Criptografados
-            const packageBuffer = new Uint8Array(salt.length + iv.length + encryptedContent.byteLength);
-            packageBuffer.set(salt, 0);
-            packageBuffer.set(iv, salt.length);
-            packageBuffer.set(new Uint8Array(encryptedContent), salt.length + iv.length);
-
-            // Converter para Base64
-            const base64String = btoa(String.fromCharCode(...packageBuffer));
-            
-            resBox.style.display = 'block';
-            resBox.innerHTML = `<strong>Código Criptografado Gerado:</strong><br>${base64String}`;
-        } catch (e) {
-            alert("Erro ao criptografar: " + e.message);
-        }
-    }
-
-    async function executarDescriptografia() {
-        const code = document.getElementById('code-decrypt').value.trim();
-        const senha = document.getElementById('pass-decrypt').value;
-        const resBox = document.getElementById('vault-result');
-
-        if (!code || !senha) {
-            alert('Preencha o código e a senha.');
-            return;
+            document.getElementById(subTabId).classList.add('active');
+            event.currentTarget.classList.add('active');
         }
 
-        try {
-            const strData = atob(code);
-            const packageBuffer = new Uint8Array(strData.length);
-            for (let i = 0; i < strData.length; i++) {
-                packageBuffer[i] = strData.charCodeAt(i);
+        // ==========================================
+        // LÓGICA ATIVIDADE 1 - COFRE DIGITAL
+        // ==========================================
+        function setVaultMode(mode) {
+            const encForm = document.getElementById('vault-encrypt-form');
+            const decForm = document.getElementById('vault-decrypt-form');
+            const btnEnc = document.getElementById('btn-mode-enc');
+            const btnDec = document.getElementById('btn-mode-dec');
+            const resBox = document.getElementById('vault-result');
+
+            resBox.style.display = 'none';
+
+            if (mode === 'enc') {
+                encForm.style.display = 'block';
+                decForm.style.display = 'none';
+                btnEnc.className = 'btn';
+                btnDec.className = 'btn btn-secondary';
+            } else {
+                encForm.style.display = 'none';
+                decForm.style.display = 'block';
+                btnEnc.className = 'btn btn-secondary';
+                btnDec.className = 'btn';
             }
+        }
 
-            if (packageBuffer.length < 28) {
-                resBox.style.display = 'block';
-                resBox.innerHTML = "Código inválido.";
+        async function getCryptoKey(senha, salt) {
+            const enc = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey(
+                "raw", enc.encode(senha), "PBKDF2", false, ["deriveKey"]
+            );
+            return crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+                    salt: salt,
+                    iterations: 200000,
+                    hash: "SHA-256"
+                },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                false,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        async function executarCriptografia() {
+            const msg = document.getElementById('msg-encrypt').value;
+            const senha = document.getElementById('pass-encrypt').value;
+            const resBox = document.getElementById('vault-result');
+
+            if (!msg || !senha) {
+                alert('Preencha a mensagem e a senha.');
                 return;
             }
 
-            const salt = packageBuffer.slice(0, 16);
-            const iv = packageBuffer.slice(16, 28);
-            const data = packageBuffer.slice(28);
+            try {
+                const salt = crypto.getRandomValues(new Uint8Array(16));
+                const iv = crypto.getRandomValues(new Uint8Array(12));
+                const key = await getCryptoKey(senha, salt);
 
-            const key = await getCryptoKey(senha, salt);
+                const enc = new TextEncoder();
+                const encryptedContent = await crypto.subtle.encrypt(
+                    { name: "AES-GCM", iv: iv },
+                    key,
+                    enc.encode(msg)
+                );
 
-            const decryptedContent = await crypto.subtle.decrypt(
-                { name: "AES-GCM", iv: iv },
-                key,
-                data
-            );
+                const packageBuffer = new Uint8Array(salt.length + iv.length + encryptedContent.byteLength);
+                packageBuffer.set(salt, 0);
+                packageBuffer.set(iv, salt.length);
+                packageBuffer.set(new Uint8Array(encryptedContent), salt.length + iv.length);
 
-            const dec = new TextDecoder();
+                const base64String = btoa(String.fromCharCode(...packageBuffer));
+                
+                resBox.style.display = 'block';
+                resBox.innerHTML = `<strong>Código Criptografado:</strong><br>${base64String}`;
+            } catch (e) {
+                alert("Erro ao criptografar: " + e.message);
+            }
+        }
+
+        async function executarDescriptografia() {
+            const code = document.getElementById('code-decrypt').value.trim();
+            const senha = document.getElementById('pass-decrypt').value;
+            const resBox = document.getElementById('vault-result');
+
+            if (!code || !senha) {
+                alert('Preencha o código e a senha.');
+                return;
+            }
+
+            try {
+                const strData = atob(code);
+                const packageBuffer = new Uint8Array(strData.length);
+                for (let i = 0; i < strData.length; i++) {
+                    packageBuffer[i] = strData.charCodeAt(i);
+                }
+
+                if (packageBuffer.length < 28) {
+                    resBox.style.display = 'block';
+                    resBox.innerHTML = "Código inválido.";
+                    return;
+                }
+
+                const salt = packageBuffer.slice(0, 16);
+                const iv = packageBuffer.slice(16, 28);
+                const data = packageBuffer.slice(28);
+
+                const key = await getCryptoKey(senha, salt);
+
+                const decryptedContent = await crypto.subtle.decrypt(
+                    { name: "AES-GCM", iv: iv },
+                    key,
+                    data
+                );
+
+                const dec = new TextDecoder();
+                resBox.style.display = 'block';
+                resBox.innerHTML = `<strong>Mensagem Descriptografada:</strong><br>${dec.decode(decryptedContent)}`;
+            } catch (e) {
+                resBox.style.display = 'block';
+                resBox.innerHTML = "<span style='color: var(--danger);'>Senha incorreta ou código alterado.</span>";
+            }
+        }
+
+        // ==========================================
+        // LÓGICA ATIVIDADE 2 - ENGENHARIA DE PROMPT
+        // ==========================================
+        function gerarPrompt() {
+            const texto = document.getElementById('prompt-text').value.trim();
+            const tipo = document.getElementById('prompt-type').value;
+            const resBox = document.getElementById('prompt-result');
+            const output = document.getElementById('prompt-output');
+
+            if (!texto) {
+                alert('Por favor, digite o texto a ser simplificado.');
+                return;
+            }
+
+            let prompt = "";
+            if (tipo === "1") {
+                prompt = "Simplifique este texto usando palavras fáceis:\n" + texto;
+            } else {
+                prompt = "Você é um assistente especializado em acessibilidade. " +
+                         "Reescreva o texto abaixo para facilitar a leitura. " +
+                         "Use palavras simples e frases curtas. " +
+                         "Explique termos difíceis, organize as informações em tópicos e preserve o significado original. " +
+                         "Não invente informações.\n\nTexto:\n" + texto;
+            }
+
+            output.textContent = prompt;
             resBox.style.display = 'block';
-            resBox.innerHTML = `<strong>Mensagem Descriptografada:</strong><br>${dec.decode(decryptedContent)}`;
-        } catch (e) {
-            resBox.style.display = 'block';
-            resBox.innerHTML = "<span style='color: var(--danger);'>Senha incorreta ou código alterado/inválido.</span>";
-        }
-    }
-
-    // ==========================================
-    // ATIVIDADE 2 - ENGENHARIA DE PROMPT
-    // ==========================================
-    function gerarPrompt() {
-        const texto = document.getElementById('prompt-text').value.trim();
-        const tipo = document.getElementById('prompt-type').value;
-        const resBox = document.getElementById('prompt-result');
-        const output = document.getElementById('prompt-output');
-
-        if (!texto) {
-            alert('Por favor, insira o texto a ser simplificado.');
-            return;
         }
 
-        let prompt = "";
-        if (tipo === "1") {
-            prompt = "Simplifique este texto usando palavras fáceis:\n" + texto;
-        } else {
-            prompt = "Você é um assistente especializado em acessibilidade. " +
-                     "Reescreva o texto abaixo para facilitar a leitura. " +
-                     "Use palavras simples e frases curtas. " +
-                     "Explique termos difíceis, organize as informações em tópicos e preserve o significado original. " +
-                     "Não invente informações.\n\nTexto:\n" + texto;
-        }
-
-        output.textContent = prompt;
-        resBox.style.display = 'block';
-    }
-
-    function copiarPrompt() {
-        const text = document.getElementById('prompt-output').textContent;
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Prompt copiado para a área de transferência!");
-        });
-    }
-
-    // ==========================================
-    // ATIVIDADE 3 - CALCULADORA NUTRICIONAL
-    // ==========================================
-    const alimentos = {
-        "arroz cozido": { calorias: 130, proteinas: 2.7, carboidratos: 28.2, gorduras: 0.3, fibras: 1.6 },
-        "feijao cozido": { calorias: 76, proteinas: 4.8, carboidratos: 13.6, gorduras: 0.5, fibras: 8.5 },
-        "frango grelhado": { calorias: 165, proteinas: 31, carboidratos: 0, gorduras: 3.6, fibras: 0 },
-        "ovo cozido": { calorias: 155, proteinas: 13, carboidratos: 1.1, gorduras: 11, fibras: 0 },
-        "banana": { calorias: 89, proteinas: 1.1, carboidratos: 22.8, gorduras: 0.3, fibras: 2.6 },
-        "aveia": { calorias: 389, proteinas: 16.9, carboidratos: 66.3, gorduras: 6.9, fibras: 10.6 }
-    };
-
-    let carrinho = [];
-
-    function carregarSelectAlimentos() {
-        const select = document.getElementById('alimento-select');
-        select.innerHTML = '';
-        for (let key in alimentos) {
-            let opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = key.charAt(0).toUpperCase() + key.slice(1);
-            select.appendChild(opt);
-        }
-    }
-
-    function adicionarAlimento() {
-        const key = document.getElementById('alimento-select').value;
-        const qtd = parseFloat(document.getElementById('alimento-qtd').value);
-
-        if (isNaN(qtd) || qtd <= 0) {
-            alert('Digite uma quantidade válida.');
-            return;
-        }
-
-        carrinho.push({ nome: key, qtd: qtd });
-        atualizarTabelaNutricional();
-    }
-
-    function removerAlimento(index) {
-        carrinho.splice(index, 1);
-        atualizarTabelaNutricional();
-    }
-
-    function atualizarTabelaNutricional() {
-        const tbody = document.getElementById('lista-alimentos');
-        tbody.innerHTML = '';
-
-        let totais = { calorias: 0, proteinas: 0, carboidratos: 0, gorduras: 0, fibras: 0 };
-
-        if (carrinho.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #94a3b8;">Nenhum alimento adicionado.</td></tr>';
-        } else {
-            carrinho.forEach((item, idx) => {
-                const dados = alimentos[item.nome];
-                const fator = item.qtd / 100;
-
-                const cals = dados.calorias * fator;
-                totais.calorias += cals;
-                totais.proteinas += dados.proteinas * fator;
-                totais.carboidratos += dados.carboidratos * fator;
-                totais.gorduras += dados.gorduras * fator;
-                totais.fibras += dados.fibras * fator;
-
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${item.nome.charAt(0).toUpperCase() + item.nome.slice(1)}</td>
-                    <td>${item.qtd}g</td>
-                    <td>${cals.toFixed(1)} kcal</td>
-                    <td><button class="btn btn-danger" style="padding: 4px 8px; font-size: 0.8rem;" onclick="removerAlimento(${idx})">Remover</button></td>
-                `;
-                tbody.appendChild(tr);
+        function copiarPrompt() {
+            const text = document.getElementById('prompt-output').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Prompt copiado com sucesso!");
             });
         }
 
-        document.getElementById('tot-calorias').textContent = totais.calorias.toFixed(1) + ' kcal';
-        document.getElementById('tot-proteinas').textContent = totais.proteinas.toFixed(1) + ' g';
-        document.getElementById('tot-carboidratos').textContent = totais.carboidratos.toFixed(1) + ' g';
-        document.getElementById('tot-gorduras').textContent = totais.gorduras.toFixed(1) + ' g';
-        document.getElementById('tot-fibras').textContent = totais.fibras.toFixed(1) + ' g';
-    }
+        // ==========================================
+        // LÓGICA ATIVIDADE 3 - CALCULADORA NUTRICIONAL
+        // ==========================================
+        const alimentos = {
+            "arroz cozido": { calorias: 130, proteinas: 2.7, carboidratos: 28.2, gorduras: 0.3, fibras: 1.6 },
+            "feijao cozido": { calorias: 76, proteinas: 4.8, carboidratos: 13.6, gorduras: 0.5, fibras: 8.5 },
+            "frango grelhado": { calorias: 165, proteinas: 31, carboidratos: 0, gorduras: 3.6, fibras: 0 },
+            "ovo cozido": { calorias: 155, proteinas: 13, carboidratos: 1.1, gorduras: 11, fibras: 0 },
+            "banana": { calorias: 89, proteinas: 1.1, carboidratos: 22.8, gorduras: 0.3, fibras: 2.6 },
+            "aveia": { calorias: 389, proteinas: 16.9, carboidratos: 66.3, gorduras: 6.9, fibras: 10.6 }
+        };
 
-    // Inicialização
-    carregarSelectAlimentos();
-</script>
+        let carrinho = [];
 
-</body>
-</html>
+        function carregarSelectAlimentos() {
+            const select = document.getElementById('alimento-select');
+            select.innerHTML = '';
+            for (let key in alimentos) {
+                let opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+                select.appendChild(opt);
+            }
+        }
+
+        function adicionarAlimento() {
+            const key = document.getElementById('alimento-select').value;
+            const qtd = parseFloat(document.getElementById('alimento-qtd').value);
+
+            if (isNaN(qtd) || qtd <= 0) {
+                alert('Digite uma quantidade válida.');
+                return;
+            }
+
+            carrinho.push({ nome: key, qtd: qtd });
+            atualizarTabelaNutricional();
+        }
+
+        function removerAlimento(index) {
+            carrinho.splice(index, 1);
+            atualizarTabelaNutricional();
+        }
+
+        function atualizarTabelaNutricional() {
+            const tbody = document.getElementById('lista-alimentos');
+            tbody.innerHTML = '';
+
+            let totais = { calorias: 0, proteinas: 0, carboidratos: 0, gorduras: 0, fibras: 0 };
+
+            if (carrinho.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #94a3b8;">Nenhum alimento adicionado.</td></tr>';
+            } else {
+                carrinho.forEach((item, idx) => {
+                    const dados = alimentos[item.nome];
+                    const fator = item.qtd / 100;
